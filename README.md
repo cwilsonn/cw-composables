@@ -1,9 +1,28 @@
-# Vue 3 + TypeScript + Vite
+# cw-vue-forms
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This is a utility library consisting of form composables and components that can be used to quickly implement forms in Vue 3.
 
-## Recommended Setup
+The components use TailwindCSS + DaisyUI under the hood, and form validation is achieved via Vuelidate.
 
-- [VS Code](https://code.visualstudio.com/) + [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (previously Volar) and disable Vetur
+All components are built using `<script setup>` and TypeScript.
 
-- Use [vue-tsc](https://github.com/vuejs/language-tools/tree/master/packages/tsc) for performing the same type checking from the command line, or for generating d.ts files for SFCs.
+This is an on-going work in progress and improvements will be made to the library over time.
+
+# Development
+
+This project uses Vite, so if you are familiar with it then developing should be a breeze:
+
+```
+npm i
+npm run dev
+```
+
+# Testing
+
+There currently aren't any component tests, but they will be added in the future via Vitest.
+
+# Form Component Types
+
+I plan on including a number of form components, not just the basic ones. These will include drag-sort lists, repeater fields, form steps, combobox (searchable, tags, multi-select, drag-sort), calendar datepicker, color picker, and transfer lists.
+
+Stay tuned for updates.
