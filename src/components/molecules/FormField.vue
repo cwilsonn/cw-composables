@@ -22,6 +22,7 @@
 
   const components: Record<string, ReturnType<typeof defineAsyncComponent>> = {
     select: defineAsyncComponent(() => import('@molecules/FormItemSelect.vue')),
+    textarea: defineAsyncComponent(() => import('@molecules/FormItemTextarea.vue')),
   }
 
   const component = computed(() => {

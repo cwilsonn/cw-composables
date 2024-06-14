@@ -75,6 +75,11 @@ export type FormItemSelectProps = {
   multiple?: boolean;
 } & Omit<FormItemBaseProps, 'type'>;
 
+// FormItemTextarea
+export type FormItemTextareaProps = {
+  rows?: number;
+} & Omit<FormItemBaseProps, 'type'>;
+
 // FormErrors
 export type FormErrorsProps = {
   errors: string[];
