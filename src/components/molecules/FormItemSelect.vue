@@ -2,10 +2,7 @@
   <FormItemBase v-bind="formItemBaseProps">
     <template #[`${name}-input`]>
       <select v-model="value"
-        :name="name"
-        :id="name"
-        :multiple="multiple"
-        class="select select-bordered">
+        v-bind="selectProps">
         <option value="null"
           disabled>
           <slot :name="`${name}-default-option`">
@@ -86,4 +83,13 @@
 
     return formItemBaseProps;
   });
+
+  const selectProps = computed(() => ({
+    id: props.name,
+    name: props.name,
+    multiple: props.multiple,
+    class: {
+      'select select-bordered': true,
+    },
+  }));
 </script>
