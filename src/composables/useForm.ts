@@ -1,6 +1,6 @@
 import { ErrorObject, useVuelidate } from '@vuelidate/core';
 
-import type { UseFormParams } from '$types/useForm.d.ts';
+import type { UseFormParams } from '$types/useForm.ts';
 
 import { toRaw, ref, reactive, computed, watch, type UnwrapRef } from 'vue';
 
