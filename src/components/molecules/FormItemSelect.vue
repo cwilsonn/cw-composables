@@ -2,8 +2,9 @@
   <FormItemBase v-bind="formItemBaseProps">
     <template #[`${name}-input`]>
       <select v-model="value"
-        :name="props.name"
-        :id="props.name"
+        :name="name"
+        :id="name"
+        :multiple="multiple"
         class="select select-bordered">
         <option value="null"
           disabled>
