@@ -3,21 +3,20 @@
     <h1 class="mb-8 text-4xl font-bold">Demo Form</h1>
     <form id="demo-form"
       class="grid grid-cols-2 gap-4">
-      <FormField
-        v-for="field in formStructure"
+      <FormField v-for="field in formStructure"
         :key="field.field"
         v-bind="field"
         v-model="formValues[field.field]"
-        @submit="submitForm"
-      />
+        @submit="submitForm" />
       <button class="col-span-2 btn"
         :disabled="isSubmitting || !isFormValid"
         @click="submitForm">
         <LoadingSpinner v-if="isSubmitting" />
         Submit
       </button>
-      <DebugFella>
-formValues: {{ formValues }}
+      <DebugFella open
+        summary="form values">
+        {{ formValues }}
       </DebugFella>
     </form>
   </div>
@@ -39,7 +38,8 @@ formValues: {{ formValues }}
     name: string | null;
     email: string | null;
     number: number | null;
-    select: string | null;
+    select: string | number | Array<string | number> | null;
+    textarea: string | null;
   }
 
   const { formValues, formErrors, isFormValid, isSubmitting, handleSubmit } = toRefs(useForm<DemoFormType>({
@@ -48,6 +48,7 @@ formValues: {{ formValues }}
       email: null,
       number: null,
       select: null,
+      textarea: null,
     },
     validationRules: {
       name: { required },
@@ -88,6 +89,7 @@ formValues: {{ formValues }}
       label: 'Select',
       type: 'select',
       wrapperProps: { class: 'col-span-2' },
+      multiple: true,
       options: [
         'Option 1',
         'Option 2',
@@ -109,6 +111,15 @@ formValues: {{ formValues }}
           ],
         },
       ],
+    },
+    {
+      field: 'textarea',
+      name: 'textarea',
+      label: 'Textarea',
+      type: 'textarea',
+      rows: 5,
+      errors: formErrors.value.textarea,
+      wrapperProps: { class: 'col-span-2' },
     },
   ]));
 
