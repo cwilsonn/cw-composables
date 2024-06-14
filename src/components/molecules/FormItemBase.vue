@@ -1,8 +1,9 @@
 <template>
-  <div class="form-control">
+  <div class="form-control"
+    v-bind="wrapperProps">
     <label v-bind="labelProps">
       <div class="label-text">
-        <slot name="label"
+        <slot :name="`${name}-label`"
           v-bind="{ label, ...labelProps }">
           {{ label }}
         </slot>
@@ -10,53 +11,26 @@
           class="align-top text-error">*</span>
       </div>
     </label>
-    <slot name="input"
+    <slot :name="`${name}-input--before`"
+      v-bind="$props" />
+    <slot :name="`${name}-input`"
       v-bind="{ inputProps }">
       <input v-bind="inputProps"
         v-model="value">
     </slot>
+    <slot :name="`${name}-input--after`"
+      v-bind="$props"></slot>
     <FormErrors v-if="errors && errors.length > 0"
       :errors="errors" />
   </div>
 </template>
 
-<script lang="ts">
-export const formItemTypes = {
-  TEXT: 'text',
-  EMAIL: 'email',
-  NUMBER: 'number',
-  DATE: 'date',
-  DATETIME: 'datetime',
-  DATETIME_LOCAL: 'datetime-local',
-  TIME: 'time',
-  WEEK: 'week',
-  MONTH: 'month',
-} as const;
-
-export const formItemSizes = ['xs', 'sm', 'md', 'lg'] as const;
-
-export type FormItemSize = typeof formItemSizes[number];
-export type FormItemType = typeof formItemTypes[keyof typeof formItemTypes];
-
-export type FormItemBaseProps = {
-  name: string;
-  label: string;
-  type?: FormItemType,
-  hideLabel?: boolean;
-  required?: boolean;
-  disabled?: boolean;
-  readonly?: boolean;
-  placeholder?: string;
-  size?: FormItemSize;
-  errors?: FormErrorsProps['errors'];
-};
-</script>
-
 <script setup
   lang="ts">
   import { computed } from 'vue';
 
-  import FormErrors, { type FormErrorsProps } from '@molecules/FormErrors.vue';
+  import FormErrors from '@molecules/FormErrors.vue';
+  import type { FormItemBaseProps } from '$types/components/forms';
 
   const props = withDefaults(defineProps<FormItemBaseProps>(), {
     type: 'text',

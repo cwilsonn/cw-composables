@@ -8,14 +8,9 @@
   </ul>
 </template>
 
-<script lang="ts">
-  export type FormErrorsProps = {
-    errors: string[];
-  };
-</script>
-
 <script setup
   lang="ts">
+  import type { FormErrorsProps } from '$types/components/forms';
 
   defineProps<FormErrorsProps>();
 </script>
