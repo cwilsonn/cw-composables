@@ -40,6 +40,9 @@
     number: number | null;
     select: string | number | Array<string | number> | null;
     textarea: string | null;
+    checkboxes: Array<string | number> | null;
+    toggles: Array<string | number> | null;
+    radios: string | number | null;
   }
 
   const { formValues, formErrors, isFormValid, isSubmitting, handleSubmit } = toRefs(useForm<DemoFormType>({
@@ -49,6 +52,9 @@
       number: null,
       select: null,
       textarea: null,
+      checkboxes: null,
+      toggles: null,
+      radios: null,
     },
     validationRules: {
       name: { required },
@@ -89,25 +95,26 @@
       label: 'Select',
       type: 'select',
       wrapperProps: { class: 'col-span-2' },
-      multiple: true,
       options: [
-        'Option 1',
-        'Option 2',
-        'Option 3',
+        { value: '1', label: 'Option 1' },
+        { value: '2', label: 'Option 2' },
+        { value: '3', label: 'Option 3' },
         {
           label: 'Group 1',
+          value: 'group1',
           options: [
-            'Group 1 Option 1',
-            'Group 1 Option 2',
-            'Group 1 Option 3',
+            { value: '4', label: 'Group 1 Option 1' },
+            { value: '5', label: 'Group 1 Option 2' },
+            { value: '6', label: 'Group 1 Option 3' },
           ],
         },
         {
           label: 'Group 2',
+          value: 'group2',
           options: [
-            'Group 2 Option 1',
-            'Group 2 Option 2',
-            'Group 2 Option 3',
+            { value: '7', label: 'Group 2 Option 1' },
+            { value: '8', label: 'Group 2 Option 2' },
+            { value: '9', label: 'Group 2 Option 3' },
           ],
         },
       ],
@@ -117,9 +124,49 @@
       name: 'textarea',
       label: 'Textarea',
       type: 'textarea',
-      rows: 5,
       errors: formErrors.value.textarea,
       wrapperProps: { class: 'col-span-2' },
+      inputProps: { rows: 5 },
+    },
+    {
+      field: 'checkboxes',
+      name: 'checkboxes',
+      label: 'Checkboxes',
+      type: 'checkboxes',
+      errors: formErrors.value.checkboxes,
+      wrapperProps: { class: 'col-span-1' },
+      options: [
+        { value: '1', label: 'Option 1' },
+        { value: '2', label: 'Option 2' },
+        { value: '3', label: 'Option 3' },
+      ],
+    },
+    {
+      field: 'toggles',
+      name: 'toggles',
+      label: 'Switches',
+      type: 'toggles',
+      errors: formErrors.value.toggles,
+      wrapperProps: { class: 'col-span-1' },
+      inputProps: { class: 'toggle-success' },
+      options: [
+        { value: '1', label: 'Option 1' },
+        { value: '2', label: 'Option 2' },
+        { value: '3', label: 'Option 3' },
+      ],
+    },
+    {
+      field: 'radios',
+      name: 'radios',
+      label: 'Contact preference',
+      type: 'radios',
+      errors: formErrors.value.radios,
+      wrapperProps: { class: 'col-span-1' },
+      options: [
+        { value: 'contact-email', label: 'Email' },
+        { value: 'contact-sms', label: 'SMS' },
+        { value: 'contact-phone', label: 'Phone call' },
+      ],
     },
   ]));
 

@@ -3,8 +3,7 @@
     <template #[`${name}-input`]>
       <select v-model="value"
         v-bind="selectProps">
-        <option value="null"
-          disabled>
+        <option value="null">
           <slot :name="`${name}-default-option`">
             Select an option
           </slot>
@@ -53,7 +52,7 @@
         </template>
       </select>
     </template>
-    <!-- Enables the use of named child slots in the parent component -->
+    <!-- Enables the use of named child slots in the consumer -->
     <template v-for="(_, slotName) in $slots"
       v-slot:[slotName]="slotProps">
       <slot :name="slotName"
@@ -66,12 +65,12 @@
   lang="ts">
   import { computed } from 'vue';
 
-  import FormItemBase from './FormItemBase.vue';
   import type { FormItemBaseProps, FormItemSelectProps } from '@/types/components/forms';
+  import FormItemBase from '@molecules/FormItemBase.vue';
 
   const props = defineProps<FormItemSelectProps>();
 
-  const value = defineModel();
+  const value = defineModel<FormItemBaseProps['value']>();
 
   const formItemBaseProps = computed(() => {
     const { label, name, ...rest } = props;
@@ -90,6 +89,14 @@
     multiple: props.multiple,
     class: {
       'select select-bordered': true,
+      'select-error': props.errors && props.errors.length > 0,
+      'select-xs': props.size === 'xs',
+      'select-sm': props.size === 'sm',
+      'select-md': props.size === 'md',
+      'select-lg': props.size === 'lg',
     },
+    disabled: props.disabled,
+    readonly: props.readonly,
+    ...props.inputProps,
   }));
 </script>

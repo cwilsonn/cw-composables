@@ -1,7 +1,7 @@
 <template>
   <component :is="component"
-    v-bind="$props">
-    <!-- Enables the use of named child slots in the parent component -->
+    v-bind="componentProps">
+    <!-- Enables the use of named child slots in the consumer -->
     <template v-for="(_, slotName) in $slots"
       v-slot:[slotName]="slotProps">
       <slot :name="slotName"
@@ -23,6 +23,12 @@
   const components: Record<string, ReturnType<typeof defineAsyncComponent>> = {
     select: defineAsyncComponent(() => import('@molecules/FormItemSelect.vue')),
     textarea: defineAsyncComponent(() => import('@molecules/FormItemTextarea.vue')),
+    checkbox: defineAsyncComponent(() => import('@molecules/FormItemCheckbox.vue')),
+    checkboxes: defineAsyncComponent(() => import('@molecules/FormItemCheckboxes.vue')),
+    radio: defineAsyncComponent(() => import('@molecules/FormItemRadio.vue')),
+    radios: defineAsyncComponent(() => import('@molecules/FormItemRadios.vue')),
+    toggles: defineAsyncComponent(() => import('@molecules/FormItemToggles.vue')),
+    toggle: defineAsyncComponent(() => import('@molecules/FormItemToggle.vue')),
   }
 
   const component = computed(() => {
@@ -34,4 +40,13 @@
       throw new Error(`Component type "${props.type}" not found in FormField.vue`);
     }
   });
-</script>
+
+  const componentProps = computed(() => {
+    if (['fieldset', 'checkboxes', 'toggles', 'radios'].includes(props.type)) {
+      const { type, ...rest } = props;
+      return rest;
+    } else {
+      return props;
+    }
+  });
+</script>@/components/molecules/FormItemToggles.vue

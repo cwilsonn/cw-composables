@@ -12,11 +12,11 @@
   import { computed } from 'vue';
 
   import FormItemBase from './FormItemBase.vue';
-  import type { FormItemBaseProps, FormItemTextareaProps } from '@/types/components/forms';
+  import type { FormItemBaseProps } from '@/types/components/forms';
 
-  const props = defineProps<FormItemTextareaProps>();
+  const props = defineProps<FormItemBaseProps>();
 
-  const value = defineModel();
+  const value = defineModel<string | null>();
 
   const formItemBaseProps = computed(() => {
     const { label, name, ...rest } = props;
@@ -32,9 +32,9 @@
   const textareaProps = computed(() => ({
     id: props.name,
     name: props.name,
-    rows: props.rows,
     class: {
       'textarea textarea-bordered': true,
     },
+    ...props.inputProps,
   }));
 </script>

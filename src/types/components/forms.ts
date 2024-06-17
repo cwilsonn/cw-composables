@@ -18,6 +18,13 @@ export const formItemTypes = {
   WEEK: 'week',
   MONTH: 'month',
   SELECT: 'select',
+  TEXTAREA: 'textarea',
+  CHECKBOX: 'checkbox',
+  CHECKBOXES: 'checkboxes',
+  TOGGLE: 'toggle',
+  TOGGLES: 'toggles',
+  RADIO: 'radio',
+  RADIOS: 'radios',
 } as const;
 
 export type FormItemType = typeof formItemTypes[keyof typeof formItemTypes];
@@ -32,7 +39,7 @@ export type FormItem = {
   readonly?: boolean;
   placeholder?: string;
   size?: FormItemSize;
-  options?: Array<FormItemSelectOption | FormItemSelectOptionGroup>;
+  options?: Array<FormItemOption>;
   multiple?: boolean;
   errors?: string[];
   wrapperProps?: Record<string, any>;
@@ -62,32 +69,53 @@ export type FormItemBaseProps = {
   size?: FormItemSize;
   errors?: FormErrorsProps['errors'];
   wrapperProps?: Record<string, any>;
+  inputProps?: Record<string, any>;
 };
 
-// FormItemSelect
-export type FormItemSelectOption = {
-  value: string | number;
+export type FormItemRadioProps = {
   label: string;
+  value: string;
+  checked?: boolean;
   disabled?: boolean;
-  title?: string;
-  id?: string;
-} | string | number;
+  wrapperProps?: Record<string, any>;
+  inputProps?: Record<string, any>
+}
 
-export type FormItemSelectOptionGroup = {
+export type FormItemCheckboxProps = {
   label: string;
-  options: Array<FormItemSelectOption>;
+  value: string;
+  checked?: boolean;
   disabled?: boolean;
+  wrapperProps?: Record<string, any>;
+  inputProps?: Record<string, any>
+}
+
+export type FormItemRadiosProps = {
+  options: Array<FormItemRadioProps>;
+} & Omit<FormItemBaseProps, 'type'>;
+
+export type FormItemCheckboxesProps = {
+  options: Array<FormItemCheckboxProps>;
+} & Omit<FormItemBaseProps, 'type'>;
+
+// FormItemSelect
+export type FormItemOption = {
+  value: string;
+  name?: string,
+  label: string;
+  disabled?: boolean;
+  readonly?: boolean;
+  title?: string;
+  size?: FormItemSize;
   id?: string;
+  options?: Array<FormItemOption>;
+  wrapperProps?: Record<string, any>;
+  inputProps?: Record<string, any>;
 };
 
 export type FormItemSelectProps = {
-  options: Array<FormItemSelectOption | FormItemSelectOptionGroup>;
+  options: Array<FormItemOption>;
   multiple?: boolean;
-} & Omit<FormItemBaseProps, 'type'>;
-
-// FormItemTextarea
-export type FormItemTextareaProps = {
-  rows?: number;
 } & Omit<FormItemBaseProps, 'type'>;
 
 // FormErrors
