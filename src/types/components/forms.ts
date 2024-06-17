@@ -39,6 +39,15 @@ export type FormItem = {
   inputProps?: Record<string, any>;
 };
 
+// FormFieldset
+export type FormFieldsetProps = {
+  name: string;
+  label: string;
+  disabled?: boolean;
+  id?: string;
+  wrapperProps?: Record<string, any>;
+}
+
 // FormItemBase
 export type FormItemBaseType = Exclude<FormItemType, 'select'>;
 export type FormItemBaseProps = {
