@@ -36,6 +36,7 @@ export type FormItem = {
   multiple?: boolean;
   errors?: string[];
   wrapperProps?: Record<string, any>;
+  inputProps?: Record<string, any>;
 };
 
 // FormItemBase

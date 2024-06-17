@@ -15,8 +15,8 @@
       v-bind="$props" />
     <slot :name="`${name}-input`"
       v-bind="{ inputProps }">
-      <input v-bind="inputProps"
-        v-model="value">
+      <input v-model="value"
+        v-bind="inputProps">
     </slot>
     <slot :name="`${name}-input--after`"
       v-bind="$props"></slot>
@@ -59,5 +59,6 @@
     disabled: props.disabled,
     readonly: props.readonly,
     placeholder: props.placeholder,
+    ...props.inputProps,
   }));
 </script>
